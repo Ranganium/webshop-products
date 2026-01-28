@@ -303,12 +303,15 @@ function displayAllProducts() {
 
 // Vis ét produkt
 function displayProduct(product) {
-  let stockText;
-  let stockClass;
+  // tjek lagerstatus
+  let stockText; // tekst til lagerstatus
+  let stockClass; // CSS-klasse til lagerstatus
   if (product.inStock) {
+    // hvis produktet er på lager
     stockText = "På lager";
     stockClass = "in-stock";
   } else {
+    // hvis produktet er udsolgt
     stockText = "Udsolgt";
     stockClass = "out-of-stock";
   }
