@@ -1,4 +1,5 @@
 import products from "./data.js";
+import { getStockStatus } from "./helpers.js";
 
 // Event listener - starter appen når siden er loaded
 document.addEventListener("DOMContentLoaded", initApp);
@@ -22,18 +23,7 @@ function displayAllProducts() {
 
 // Vis ét produkt
 function displayProduct(product) {
-  // tjek lagerstatus
-  let stockText; // tekst til lagerstatus
-  let stockClass; // CSS-klasse til lagerstatus
-  if (product.inStock) {
-    // hvis produktet er på lager
-    stockText = "På lager";
-    stockClass = "in-stock";
-  } else {
-    // hvis produktet er udsolgt
-    stockText = "Udsolgt";
-    stockClass = "out-of-stock";
-  }
+  const stock = getStockStatus(product);
 
   // lav HTML
   const html = /*html*/ `
@@ -45,7 +35,7 @@ function displayProduct(product) {
         ${product.description}
       </p>
       <p class="product-price">$${product.price}</p>
-      <span class="product-stock ${stockClass}">${stockText}</span>
+      <span class="product-stock ${stock.class}">${stock.text}</span>
     </div>
   </article>
   `;
