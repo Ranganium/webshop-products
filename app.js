@@ -31,11 +31,15 @@ function displayProduct(product) {
 
   return /*html*/ `
     <article class="product-card">
-      <img src="${product.image}" class="product-image" />
+      <a href="product.html?id=${product.id}">
+        <img src="${product.image}" class="product-image" />
+      </a>
       <div class="product-info">
         ${product.id < 5 ? '<span class="badge new">New!</span>' : ""}
         ${(product.rating.count > 200 && "Bestseller") || ""}
-        <h2 class="product-title">${product.title}</h2>
+        <h2 class="product-title">
+          <a href="product.html?id=${product.id}">${product.title}</a>
+        </h2>
         <p class="product-description">${getExcerpt(product.description)}</p>
         <p class="product-price" style="color: ${product.price < 50 ? "green" : "black"}"> ${product.price}</p>
         <span class="product-stock ${product.inStock ? "in-stock" : "out-of-stock"}">
