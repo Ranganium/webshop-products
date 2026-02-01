@@ -1,20 +1,29 @@
-import { products } from "./data.js";
-import { getExcerpt, getStockStatus } from "./helpers.js";
+// import { products } from "./data.js";
+import { getExcerpt, getStockStatus, getAllProducts } from "./helpers.js";
 
 // Event listener - starter appen når siden er loaded
 document.addEventListener("DOMContentLoaded", initApp);
 
+const url =
+  "https://raw.githubusercontent.com/cederdorff/race/refs/heads/master/data/webshop/products.json";
+const response = await fetch(url);
+console.log(response);
+
+const data = await response.json();
+console.log(data);
+
 // Initialize app
-function initApp() {
-  console.log("App initialized");
-  displayAllProducts();
+async function initApp() {
+  console.log("App initialized 🚀");
+  const products = await getAllProducts();
+  displayAllProducts(products);
 }
 
 // Vis alle produkter
-function displayAllProducts() {
+const displayAllProducts = (products) => {
   const grid = document.querySelector("#productGrid");
   grid.innerHTML = products.map(displayProduct).join("");
-}
+};
 
 // Vis ét produkt
 function displayProduct(product) {
@@ -36,7 +45,3 @@ function displayProduct(product) {
     </article>
   `;
 }
-
-const testProduct = products[0];
-console.log(testProduct.name || "Unavngivet"); // Hvad vises?
-console.log(testProduct.color || "Ingen farve"); // Hvad vises?
